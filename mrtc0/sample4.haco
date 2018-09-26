@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+Haconiwa.define do |config|
+  config.name = "sample1"
+  config.init_command = "/bin/bash"
+  root = Pathname.new("/var/lib/haconiwa/sample1")
+  config.chroot_to root
+
+  config.bootstrap do |b|
+    b.strategy = "lxc"
+    b.os_type  = "ubuntu"
+  end
+
+  config.provision do |p|
+    p.run_shell <<-SHELL
+apt-get update -y
+apt-get install -y build-essential gcc
+PATH=$PATH:/root/
+export PATH
+    SHELL
+  end
+
+  config.mount_independent "procfs"
+  config.mount_independent "sysfs"
+  config.mount_independent "devtmpfs"
+  config.mount_independent "devpts"
+  config.mount_independent "shm"
+
+  config.namespace.unshare "mount"
+  config.namespace.unshare "ipc"
+  config.namespace.unshare "uts"
+  config.namespace.unshare "pid"
+
+  config.capabilities.allow :all
+end
