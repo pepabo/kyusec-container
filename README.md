@@ -26,3 +26,11 @@ vagrant box add kyusec-container /path/to/package.box
 vagrant init kyusec-container
 vagrant up
 ```
+
+## 演習のコマンドについて
+
+コピペしやすいように、以下の gist に各演習でのコマンドを載せています。
+
+* https://gist.github.com/mrtc0/4fdecf6f54113fc10fabe8d881ecfa74
+
+`[コンテナ側]` と書いているのはコンテナでの作業です。逆に `[ホスト側]` と書いているのはホスト側での作業となります。
